@@ -33,16 +33,20 @@ const App = () => {
     setVotes(newVotes)
   }
 
-  const mostVotes = () => {
-    let maxIndex = 0;
-    for (let i = 1;i < votes.length;i++){
-      if (votes[i] > votes[maxIndex]){
-        maxIndex = i
-      }
-    }
+  // const mostVotes = () => {
+  //   let maxIndex = 0;
+  //   for (let i = 1;i < votes.length;i++){
+  //     if (votes[i] > votes[maxIndex]){
+  //       maxIndex = i
+  //     }
+  //   }
 
+  const maxIndex = votes.reduce((maxIndex,_,index) => { // array.reduce(arrcuate,currentValue,currIndex) => {}
+    if (votes[index] > votes[maxIndex]){
+      return index
+    }
     return maxIndex
-  }
+  },0)
 
   return (
     <main>
@@ -58,7 +62,7 @@ const App = () => {
 
       <div>
         <h1>Anecdote with most votes </h1>
-        <p>{anecdotes[mostVotes()]} has {votes[mostVotes()]}</p>
+        <p>{anecdotes[maxIndex]} has {votes[maxIndex]}</p>
       </div>
     </main>
   )
@@ -66,6 +70,7 @@ const App = () => {
 
 export default App
 
+// 数组的函数式编程方法： map 对一个数组的所有元素进行处理生成一个新数组 foreach 对每一个数组元素处理但不生成数组 filter 筛选元素返回新数组 find 找到第一个符合的元素 some 是否至少一个符合 every 是否所有都符合 some和every最后都返回(true或者false) reduce 规约
 
 
 // import { useState } from 'react'
